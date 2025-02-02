@@ -3,6 +3,7 @@
 - [ ] Home manager
 - [ ] Flakes
 - [ ] DE - Cosmic / Hyprland
+- [ ] Hyprland
 - [ ] [Encryption and Yubikey](https://nixos.wiki/wiki/Yubikey_based_Full_Disk_Encryption_(FDE)_on_NixOS)
 - [ ] [nixos-anywhere](https://github.com/nix-community/nixos-anywhere)
 - [ ] [Disko](https://github.com/nix-community/disko)
@@ -13,6 +14,15 @@
 - [ ] sops/age/secrets
 - [ ] [podman](https://nixos.wiki/wiki/Podman)
 - [ ] [xremap](https://www.youtube.com/watch?v=UPWkQ3LUDOU)
+- [ ] [lanzaboote](https://github.com/nix-community/lanzaboote)
+- [ ] Impermanence
+- [ ] Stylix
+- [ ] Clipboard manager
+- [ ] Bitwarden SSH agent
+- [ ] fwupd
+- [ ] Garbage cleanup
+
+
 
 ## Resources
 
