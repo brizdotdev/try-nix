@@ -5,10 +5,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot = {
@@ -19,7 +19,7 @@
       efi.canTouchEfiVariables = true;
       systemd-boot = {
         enable = true;
-	consoleMode = "max";
+        consoleMode = "max";
       };
     };
 
@@ -131,13 +131,29 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  fonts.packages = with pkgs; [
+    (nerdfonts.override {
+      fonts = [
+        "Iosevka"
+        "JetBrainsMono"
+        "VictorMono"
+      ];
+    })
+    iosevka
+    jetbrains-mono
+    victor-mono
+  ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.briz = {
     isNormalUser = true;
     description = "briz";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
-    #  TODO: Move to home manager
+      #  TODO: Move to home manager
       ghostty
       git
       gum
@@ -156,6 +172,8 @@
       bitwarden-desktop
       # gparted
       # sysz
+      nixfmt-rfc-style
+      nixd
     ];
   };
 
@@ -163,9 +181,9 @@
   programs.firefox.enable = true;
 
   programs.neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
   };
 
   # Allow unfree packages
@@ -204,20 +222,19 @@
   services.yubikey-agent.enable = true;
 
   services.udev.extraRules = ''
-      ACTION=="remove",\
-       ENV{ID_BUS}=="usb",\
-       ENV{ID_MODEL_ID}=="0407",\
-       ENV{ID_VENDOR_ID}=="1050",\
-       ENV{ID_VENDOR}=="Yubico",\
-       RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
+    ACTION=="remove",\
+     ENV{ID_BUS}=="usb",\
+     ENV{ID_MODEL_ID}=="0407",\
+     ENV{ID_VENDOR_ID}=="1050",\
+     ENV{ID_VENDOR}=="Yubico",\
+     RUN+="${pkgs.systemd}/bin/loginctl lock-sessions"
   '';
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   environment.variables = {
