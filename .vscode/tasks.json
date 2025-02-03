@@ -1,0 +1,41 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "copy to /etc/nixos",
+      "type": "shell",
+      "command": "sudo cp ${workspaceFolder}/prometheus/*.nix /etc/nixos/ && sudo chown root:root /etc/nixos/*.nix && echo 😁",
+      "icon": {
+        "color": "terminal.ansiWhite",
+        "id": "copy"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "nixos-rebuild switch",
+      "type": "shell",
+      "command": "sudo cp ${workspaceFolder}/prometheus/*.nix /etc/nixos/ && sudo chown root:root /etc/nixos/*.nix && sudo nixos-rebuild switch && echo 😁",
+      "icon": {
+        "color": "terminal.ansiBlue",
+        "id": "symbol-property"
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": false,
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
+}
