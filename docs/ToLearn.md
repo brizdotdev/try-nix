@@ -1,10 +1,9 @@
 # Things to learn more about
 
-- [ ] Home manager
 - [ ] Flakes
+- [ ] Home manager
 - [ ] DE - Cosmic / Hyprland
 - [ ] Hyprland
-- [ ] [Encryption and Yubikey](https://nixos.wiki/wiki/Yubikey_based_Full_Disk_Encryption_(FDE)_on_NixOS)
 - [ ] [nixos-anywhere](https://github.com/nix-community/nixos-anywhere)
 - [ ] [Disko](https://github.com/nix-community/disko)
 - [ ] [nixops](https://github.com/NixOS/nixops)
@@ -21,7 +20,11 @@
 - [ ] Bitwarden SSH agent
 - [ ] fwupd
 - [ ] Garbage cleanup
-
+- [ ] Remove extra stuff from Gnome
+- [ ] https://github.com/NixOS/nixos-hardware
+- [ ] librewolf
+  - https://github.com/search?q=path%3A*.nix%20librewolf&type=code
+  - https://old.reddit.com/r/NixOS/search?q=librewolf&restrict_sr=on&sort=relevance&t=all
 
 
 ## Resources

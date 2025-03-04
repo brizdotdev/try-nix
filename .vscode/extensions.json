@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "jnoortheen.nix-ide",
-    "gordonlarrigan.vscode-kanbn"
+    "gordonlarrigan.vscode-kanbn",
+    "rszyma.vscode-kanata"
   ]
 }

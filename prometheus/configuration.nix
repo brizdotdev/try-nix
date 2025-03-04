@@ -10,12 +10,14 @@
     ./hardware-configuration.nix
   ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Bootloader.
   boot = {
     consoleLogLevel = 0;
 
     loader = {
-      timeout = 0;
+      timeout = 2;
       efi.canTouchEfiVariables = true;
       systemd-boot = {
         enable = true;
@@ -64,6 +66,11 @@
   networking.hostName = "prometheus"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  networking.firewall = {
+    enable = true;
+    interfaces."wlp59s0".allowedTCPPorts = [ 3131 ];
+  };
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -104,9 +111,22 @@
   '';
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  # services.xserver.xkb = {
+  #   layout = "us";
+  #   variant = "";
+  # };
+
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      laptopKeyboard = {
+        devices = [
+          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+        ];
+        extraDefCfg = "process-unmapped-keys yes";
+        config = builtins.readFile ./config/laptop.kbd;
+      };
+    };
   };
 
   # Enable CUPS to print documents.
@@ -134,6 +154,7 @@
   fonts.packages = with pkgs; [
     (nerdfonts.override {
       fonts = [
+        "SpaceMono"
         "Iosevka"
         "JetBrainsMono"
         "VictorMono"
@@ -166,7 +187,7 @@
       superfile
       vscode
       bat
-      libreoffice-qt
+      # libreoffice-qt
       hunspell
       hunspellDicts.en_AU
       bitwarden-desktop
@@ -174,6 +195,28 @@
       # sysz
       nixfmt-rfc-style
       nixd
+      obsidian
+      flameshot
+      copyq
+      fzf
+      fd
+      fastfetch
+      starship
+      zoxide
+      jq
+      yq
+      ripgrep
+      bat
+      lf
+      glow
+      sd
+      fx
+      lsd
+      eza
+      delta
+      atuin
+      zed-editor
+      code-cursor
     ];
   };
 
