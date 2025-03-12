@@ -217,6 +217,14 @@
       atuin
       zed-editor
       code-cursor
+      spotify
+      spotify-player
+      nh
+      legcord
+      kitty
+      alacritty
+      htop
+      bottom
     ];
   };
 
@@ -257,10 +265,10 @@
     };
   };
 
-  programs.yubikey-touch-detector = {
-    enable = true;
-    libnotify = true;
-  };
+  # programs.yubikey-touch-detector = {
+  #   enable = true;
+  #   libnotify = true;
+  # };
 
   services.yubikey-agent.enable = true;
 

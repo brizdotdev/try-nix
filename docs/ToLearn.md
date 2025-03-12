@@ -25,6 +25,8 @@
 - [ ] librewolf
   - https://github.com/search?q=path%3A*.nix%20librewolf&type=code
   - https://old.reddit.com/r/NixOS/search?q=librewolf&restrict_sr=on&sort=relevance&t=all
+- https://github.com/InioX/matugen
+- [ ] MPV scripts
 
 
 ## Resources
