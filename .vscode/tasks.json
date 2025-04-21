@@ -4,7 +4,10 @@
     {
       "label": "nixos-rebuild switch",
       "type": "shell",
-      "command": "sudo cp ${workspaceFolder}/prometheus/*.nix /etc/nixos/ && sudo cp ${workspaceFolder}/prometheus/flake.lock /etc/nixos/ && sudo cp -r ${workspaceFolder}/config /etc/nixos/ && sudo chown -R root:root /etc/nixos/ && sudo nixos-rebuild switch --flake .#prometheus && echo 😁",
+      "options": {
+        "cwd": "/etc/nixos"
+      },
+      "command": "sudo cp ${workspaceFolder}/prometheus/*.nix ./ && nix flake lock ${workspaceFolder}/prometheus/flake.nix  && sudo cp ${workspaceFolder}/prometheus/flake.lock ./ && sudo cp -r ${workspaceFolder}/config ./ && sudo chown -R root:root ./ && sudo nixos-rebuild switch --flake .#prometheus && echo 😁",
       "icon": {
         "color": "terminal.ansiBlue",
         "id": "symbol-property"
