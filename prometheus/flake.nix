@@ -14,7 +14,11 @@
   };
 
   outputs =
-    inputs@{ self, nixpkgs, ... }:
+    inputs@{
+      self,
+      nixpkgs,
+      ...
+    }:
     {
       nixosConfigurations = {
         prometheus = nixpkgs.lib.nixosSystem {

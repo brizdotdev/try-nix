@@ -16,6 +16,8 @@
   boot = {
     consoleLogLevel = 0;
 
+    kernelPackages = pkgs.linuxPackages_latest;
+
     loader = {
       timeout = 2;
       efi.canTouchEfiVariables = true;
@@ -68,7 +70,9 @@
 
   networking.firewall = {
     enable = true;
-    interfaces."wlp59s0".allowedTCPPorts = [ 3131 ];
+    interfaces."wlp59s0".allowedTCPPorts = [
+      53317 # Localsend
+    ];
   };
 
   # Configure network proxy if necessary
@@ -103,12 +107,21 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  services.mullvad-vpn = {
+    enable =  true;
+    package = pkgs.mullvad-vpn;
+  };
+
   # Disable lid switch
   services.logind.extraConfig = ''
     HandleLidSwitch=ignore
     HandleLidSwitchExternalPower=ignore
     HandleLidSwitchDocked=ignore
   '';
+
+  powerManagement.enable = true;
+  powerManagement.powertop.enable = true;
+  services.thermald.enable = true;
 
   # Configure keymap in X11
   # services.xserver.xkb = {
@@ -123,7 +136,7 @@
         devices = [
           "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
         ];
-        extraDefCfg = "process-unmapped-keys yes";
+        extraDefCfg = "process-unmapped-keys no";
         config = builtins.readFile ./config/laptop.kbd;
       };
     };
@@ -152,17 +165,10 @@
   # services.xserver.libinput.enable = true;
 
   fonts.packages = with pkgs; [
-    (nerdfonts.override {
-      fonts = [
-        "SpaceMono"
-        "Iosevka"
-        "JetBrainsMono"
-        "VictorMono"
-      ];
-    })
-    iosevka
-    jetbrains-mono
-    victor-mono
+    nerd-fonts.space-mono
+    nerd-fonts.iosevka
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.victor-mono
   ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -188,8 +194,8 @@
       vscode
       bat
       # libreoffice-qt
-      hunspell
-      hunspellDicts.en_AU
+      # hunspell
+      # hunspellDicts.en_AU
       bitwarden-desktop
       # gparted
       # sysz
@@ -221,10 +227,9 @@
       spotify-player
       nh
       legcord
-      kitty
-      alacritty
       htop
-      bottom
+      transmission_4-gtk
+      localsend
     ];
   };
 
@@ -286,7 +291,24 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    podman-tui
+    podman-compose
+    podman-desktop
   ];
+
+  virtualisation.containers.enable = true;
+
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   environment.variables = {
     NIXPKGS_ALLOW_UNFREE = 1;
